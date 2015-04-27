@@ -146,7 +146,7 @@
   [popoutView addGestureRecognizer:tap];
   popoutView.alpha = 0;
   [self addSubview:popoutView];
-  [self sendSubviewToBack:popoutView];
+//  [self sendSubviewToBack:popoutView];
   popoutView.center = CGPointMake(self.bounds.origin.x + self.bounds.size.width/2,self.bounds.origin.y + self.bounds.size.height/2);
 }
 
