@@ -184,11 +184,20 @@
 #pragma mark Helper Methods
 
 - (CGAffineTransform) getTransformForPopupViewAtIndex: (NSInteger) index {
-  CGFloat newAngle = self.startAngle + (self.distanceBetweenPopouts * index);
-  CGFloat deltaY = -self.distanceFromCenter * cos(newAngle/ 180.0 * M_PI);
-  CGFloat deltaX = self.distanceFromCenter * sin(newAngle/ 180.0 * M_PI);
-  return CGAffineTransformMakeTranslation(deltaX, deltaY);
-  
+    CGFloat distanceFromCenter = 0.f;
+    CGFloat newAngle = 0.f;
+    
+    if (self.useSpiral) {
+        distanceFromCenter = self.distanceFromCenter + 3.5f * index;
+        newAngle = self.startAngle + self.distanceBetweenPopouts * (+ index/3.f + 2.5f * sqrt(index + 1));
+    }
+    else{
+        newAngle = self.startAngle + (self.distanceBetweenPopouts * index);
+        distanceFromCenter = self.distanceFromCenter;
+    }
+    CGFloat deltaY = -distanceFromCenter * cos(newAngle/ 180.0 * M_PI);
+    CGFloat deltaX = distanceFromCenter * sin(newAngle/ 180.0 * M_PI);
+    return CGAffineTransformMakeTranslation(deltaX, deltaY);
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{

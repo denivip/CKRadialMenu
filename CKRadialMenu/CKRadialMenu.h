@@ -43,6 +43,7 @@
 @property NSTimeInterval stagger;
 
 @property BOOL menuIsExpanded;
+@property BOOL useSpiral;
 
 @end
 
